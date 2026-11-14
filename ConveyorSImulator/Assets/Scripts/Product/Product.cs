@@ -36,9 +36,9 @@ public class Product : MonoBehaviour
 
         if (progress >= 1f)
         {
-            if (currentConveyor.nextConveyor != null)
+            if (currentConveyor.NextConveyor != null)
             {
-               currentConveyor = currentConveyor.nextConveyor;
+               currentConveyor = currentConveyor.NextConveyor;
                distanceTravelled = 0f;
                Debug.Log("Reached next conveyor.");
             }

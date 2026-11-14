@@ -7,8 +7,10 @@ public class conveyor : MonoBehaviour
     public Transform exitPoint;
 
     [Header("Connections")]
-    public conveyor previousConveyor;
-    public conveyor nextConveyor;
+    [SerializeField]private conveyor previousConveyor;
+    public conveyor PreviousConveyor => previousConveyor;
+    [SerializeField]private conveyor nextConveyor;
+    public conveyor NextConveyor => nextConveyor;
 
     [Header("Settings")]
     public float speed = 2f;
