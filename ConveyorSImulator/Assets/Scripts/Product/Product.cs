@@ -6,7 +6,10 @@ public class Product : MonoBehaviour
 
     private float distanceTravelled;
 
+    [Header("Settings")]
     public bool FollowConveyorRotation = false;
+    [SerializeField]
+    private Vector3 positionOffset;
 
     private void Start()
     {
@@ -24,7 +27,7 @@ public class Product : MonoBehaviour
 
         progress = Mathf.Clamp01(progress);
 
-        transform.position = currentConveyor.GetPosition(progress);
+        transform.position = currentConveyor.GetPosition(progress) + positionOffset;
 
         if (FollowConveyorRotation)
         {
@@ -33,9 +36,20 @@ public class Product : MonoBehaviour
 
         if (progress >= 1f)
         {
-            enabled = false;
+            if (currentConveyor.nextConveyor != null)
+            {
+               currentConveyor = currentConveyor.nextConveyor;
+               distanceTravelled = 0f;
+               Debug.Log("Reached next conveyor.");
+            }
+            else
+            {
+                enabled = false;
+                Debug.Log("Reached end of conveyor.");
+            }
+            
 
-            Debug.Log("Reached end of conveyor.");
+            
         }
     }
 }

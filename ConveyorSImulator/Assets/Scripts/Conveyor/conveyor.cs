@@ -6,6 +6,10 @@ public class conveyor : MonoBehaviour
     public Transform entryPoint;
     public Transform exitPoint;
 
+    [Header("Connections")]
+    public conveyor previousConveyor;
+    public conveyor nextConveyor;
+
     [Header("Settings")]
     public float speed = 2f;
 
