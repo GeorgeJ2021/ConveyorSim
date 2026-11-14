@@ -495,6 +495,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.6.9f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/CameraCTRL.cs"
 "Assets/Scripts/Conveyor/conveyor.cs"
+"Assets/Scripts/PlacementManager.cs"
 "Assets/Scripts/Product/Product.cs"
 "Assets/TutorialInfo/Readme.cs"
 -langversion:9.0
