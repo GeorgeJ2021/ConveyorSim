@@ -3,13 +3,13 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 .utmp/
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+ConveyorSImulator/[Ll]ibrary/
+ConveyorSImulator/[Tt]emp/
+ConveyorSImulator/[Oo]bj/
+ConveyorSImulator/[Bb]uild/
+ConveyorSImulator/[Bb]uilds/
+ConveyorSImulator/[Ll]ogs/
+ConveyorSImulator/[Uu]ser[Ss]ettings/
 *.log
 
 # MemoryCaptures can get excessive in size.
