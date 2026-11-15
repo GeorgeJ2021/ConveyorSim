@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2505135237351188956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8797838053143210149}
+  - component: {fileID: 531937365288146765}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8797838053143210149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505135237351188956}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.18441848, y: -0, z: -0, w: 0.9828478}
+  m_LocalPosition: {x: 0, y: 0.057, z: -0.105}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7353440703318504867}
+  m_LocalEulerAnglesHint: {x: 21.254, y: 0, z: 0}
+--- !u!65 &531937365288146765
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505135237351188956}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.83, y: 0.15, z: 2.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1022977835925801551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,10 +111,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9054371640214431727, guid: 84626629f3f1e244e84fc4967e5ada28, type: 3}
       propertyPath: m_Name
-      value: Incline_Conveyor Variant
+      value: FinalIncline
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7511709200054370284, guid: 84626629f3f1e244e84fc4967e5ada28, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 8797838053143210149}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84626629f3f1e244e84fc4967e5ada28, type: 3}
+--- !u!4 &7353440703318504867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7511709200054370284, guid: 84626629f3f1e244e84fc4967e5ada28, type: 3}
+  m_PrefabInstance: {fileID: 1022977835925801551}
+  m_PrefabAsset: {fileID: 0}

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Product : MonoBehaviour
 {
     private conveyor currentConveyor;
+    private ProductSpawner spawner;
 
     private float distanceTravelled;
 
@@ -13,10 +14,16 @@ public class Product : MonoBehaviour
 
     [SerializeField] private LayerMask productLayer;
     private Collider productCollider;
+    private Rigidbody rb;
 
     private void Awake()
     {
         productCollider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+    }
+    public void Initialise(ProductSpawner owner)
+    {
+        spawner = owner;
     }
     private void Start()
     {
@@ -89,7 +96,7 @@ public class Product : MonoBehaviour
             }
             else
             {
-                enabled = false;
+                EndofConveyor();
             }
         }
     }
@@ -105,5 +112,16 @@ public class Product : MonoBehaviour
         {
             transform.rotation = conveyor.GetRotation();
         }
+    }
+
+    private void EndofConveyor()
+    {
+        currentConveyor = null;
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+
+        enabled = false;
+        spawner.ProductsOnGround(this);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ProductSpawner : MonoBehaviour
@@ -7,6 +8,9 @@ public class ProductSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float spawnCooldown = 2.0f;
     private float nextSpawnTime;
+
+    [SerializeField] private int maxGroundProducts = 4;
+    private readonly Queue<Product> groundProducts = new();
 
     [Header("Product Prefabs")]
     [SerializeField] private GameObject boxPrefab;
@@ -40,7 +44,19 @@ public class ProductSpawner : MonoBehaviour
             Debug.LogError($"{prefab.name} does not have a Product component.");
             return;
         }
-
+        product.Initialise(this);
         product.SetCurrentConveyor(startConveyor);
+    }
+
+    public void ProductsOnGround(Product product)
+    {
+        groundProducts.Enqueue(product);
+
+        if (groundProducts.Count > maxGroundProducts)
+        {
+            Product oldest = groundProducts.Dequeue();
+
+            Destroy(oldest.gameObject);
+        }
     }
 }
