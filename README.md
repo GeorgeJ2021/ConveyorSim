@@ -122,6 +122,37 @@ Run the executable.
 
 *Spawn buttons have a 2-second cooldown to prevent excessive product spawning and maintain a stable simulation.
 
+## Implementation Notes
+
+### Conveyor System
+
+Each conveyor contains:
+
+- Entry point
+
+- Exit point
+
+- Previous conveyor reference
+
+- Next conveyor reference
+
+Products move by interpolating between the entry and exit points before transferring to the next connected conveyor.
+
+### Placement System
+
+Conveyors are placed during runtime using a placement manager. New conveyors automatically snap to compatible connection points, allowing continuous conveyor networks to be built interactively.
+
+### Product System
+
+Products are spawned through a fixed spawner connected to the beginning of the conveyor network. Each product tracks its current conveyor and transitions automatically between connected segments until reaching the end of the conveyor line.
+
+## Known Limitations
+
+- Conveyor routing currently follows direct neighbour connections and does not support automatic routing at junctions.
+
+- Conveyor speeds are configured per conveyor module.
+
+- Product spacing is controlled through spawn timing rather than conveyor occupancy logic.
 
 
   
