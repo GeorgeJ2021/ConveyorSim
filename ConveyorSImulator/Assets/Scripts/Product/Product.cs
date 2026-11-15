@@ -11,6 +11,13 @@ public class Product : MonoBehaviour
     [SerializeField]
     private Vector3 positionOffset;
 
+    [SerializeField] private LayerMask productLayer;
+    private Collider productCollider;
+
+    private void Awake()
+    {
+        productCollider = GetComponent<Collider>();
+    }
     private void Start()
     {
         distanceTravelled = 0f;
@@ -21,35 +28,69 @@ public class Product : MonoBehaviour
         if (currentConveyor == null)
             return;
 
-        distanceTravelled += currentConveyor.speed * Time.deltaTime;
+        float proposedDistance =
+            distanceTravelled +
+            currentConveyor.speed * Time.deltaTime;
 
-        float progress = distanceTravelled / currentConveyor.Length;
+        float progress =
+            Mathf.Clamp01(proposedDistance / currentConveyor.Length);
 
-        progress = Mathf.Clamp01(progress);
+        Vector3 nextPosition =
+            currentConveyor.GetPosition(progress) +
+            positionOffset;
 
-        transform.position = currentConveyor.GetPosition(progress) + positionOffset;
+        Bounds bounds = productCollider.bounds;
 
-        if (FollowConveyorRotation)
+        Vector3 overlapCentre =
+            nextPosition +
+            (bounds.center - transform.position);
+
+        Collider[] hits = Physics.OverlapBox(
+            overlapCentre,
+            bounds.extents * 0.9f,
+            transform.rotation,
+            productLayer);
+
+        bool blocked = false;
+
+        foreach (Collider hit in hits)
         {
-            transform.rotation = currentConveyor.GetRotation();
+            if (hit.gameObject == gameObject)
+                continue;
+
+            blocked = true;
+            break;
         }
 
-        if (progress >= 1f)
+        if (!blocked)
+        {
+            distanceTravelled = proposedDistance;
+            transform.position = nextPosition;
+
+            if (FollowConveyorRotation)
+            {
+                transform.rotation =
+                    currentConveyor.GetRotation();
+            }
+        }
+
+        float actualProgress =
+            distanceTravelled /
+            currentConveyor.Length;
+
+        if (actualProgress >= 1f)
         {
             if (currentConveyor.NextConveyor != null)
             {
-               currentConveyor = currentConveyor.NextConveyor;
-               distanceTravelled = 0f;
-               Debug.Log("Reached next conveyor.");
+                currentConveyor =
+                    currentConveyor.NextConveyor;
+
+                distanceTravelled = 0f;
             }
             else
             {
                 enabled = false;
-                Debug.Log("Reached end of conveyor.");
             }
-            
-
-            
         }
     }
 
