@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlacementManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlacementManager : MonoBehaviour
 
     private GameObject currentGhost;
     private GameObject currentPrefab;
+    private conveyor snappedTo;
 
     public void SetCurrentPrefab(GameObject prefab)
     {
@@ -36,6 +38,8 @@ public class PlacementManager : MonoBehaviour
     {
         conveyor ghostConveyor = currentGhost.GetComponent<conveyor>();
         conveyor closestConveyor = null;
+        snappedTo = null;
+        
         float closestDistance = Mathf.Infinity;
         
         Vector3 localOffset = ghostConveyor.entryPoint.localPosition;
@@ -67,6 +71,7 @@ public class PlacementManager : MonoBehaviour
                     ghostEntry;
 
                 targetPosition += offset;
+                snappedTo = closestConveyor;
 
                 break;
             }
@@ -93,7 +98,8 @@ public class PlacementManager : MonoBehaviour
            
         }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && 
+            !EventSystem.current.IsPointerOverGameObject())
         {
             GameObject conveyorObject = Instantiate(
                 currentPrefab,
@@ -103,6 +109,11 @@ public class PlacementManager : MonoBehaviour
             conveyor Conveyor = conveyorObject.GetComponent<conveyor>();
 
             placedConveyors.Add(Conveyor);
+            if (snappedTo != null)
+            {
+                snappedTo.SetNextConveyor(Conveyor);
+                Conveyor.SetPreviousConveyor(snappedTo);
+            }
         }
     }
     private void Update()

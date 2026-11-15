@@ -40,4 +40,14 @@ public class conveyor : MonoBehaviour
             return Vector3.Distance(entryPoint.position, exitPoint.position);
         }
     }
+
+    public void SetNextConveyor(conveyor conveyor)
+    {
+        nextConveyor = conveyor;
+    }
+
+    public void SetPreviousConveyor(conveyor conveyor)
+    {
+        previousConveyor = conveyor;
+    }
 }
