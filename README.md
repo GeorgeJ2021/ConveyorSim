@@ -33,3 +33,95 @@ The goal of this project was to create a conveyor framework that can support dyn
   - Short Conveyor
 
   - Inclined Conveyor
+### Conveyor Network: 
+- Conveyors maintain connections with neighbouring conveyors.
+- Products automatically transition between connected conveyor modules.
+
+### Product Simulation
+
+Currently supported products:
+
+- Cardboard Box
+
+- Metal Can
+
+Products:
+
+- Move smoothly along conveyor surfaces.
+
+- Follow conveyor direction and inclination.
+
+- Transition automatically between connected conveyors.
+
+### Product Management
+
+- Product spawning through UI controls.
+
+- Maximum released product limit prevents unlimited object accumulation.
+
+## Development Tools
+
+### Engine
+
+Unity 6
+
+### Programming Language
+
+C#
+
+### IDE
+
+Visual Studio Code
+
+### Version Control
+
+Git
+
+GitHub
+
+Git LFS (for large asset support)
+
+### Unity Packages
+
+Input System
+
+TextMeshPro
+
+## How to Run
+
+### Requirements
+
+Windows operating system
+
+Unity 6 (for opening/editing the project)
+
+### Running the Build
+
+Extract the provided zip archive.
+
+Open the Build folder.
+
+Run the executable.
+
+## Controls
+
+### Camera:
+
+- WASD - Move Camera
+- Mouse + Right button (hold) - Look Around
+   
+### Conveyor Placement:
+- Left Mouse Click - Place selected conveyor
+- R - Rotate Conveyor
+
+### UI:
+- Spawn box button - spawns a cardboard box on the starting conveyor*
+- Spawn Can button - spawns a metal can on the starting conveyor*
+- Reset button - resets the entire scene, clears placed conveyors
+- Quit button - quits the game.
+
+*Spawn buttons have a 2-second cooldown to prevent excessive product spawning and maintain a stable simulation.
+
+
+
+  
