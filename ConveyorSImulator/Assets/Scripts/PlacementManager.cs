@@ -10,6 +10,8 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float snapDistance = 0.3f;
 
+    [SerializeField] private conveyor fixedStartConveyor;
+
     [Header("Prefabs")]
     private readonly List<conveyor> placedConveyors = new();
     [SerializeField] private GameObject shortConveyor;
@@ -116,6 +118,13 @@ public class PlacementManager : MonoBehaviour
             }
         }
     }
+
+    private void Start()
+    {
+        if (fixedStartConveyor != null)
+            placedConveyors.Add(fixedStartConveyor);
+    }
+    
     private void Update()
     {
         if (currentGhost == null)

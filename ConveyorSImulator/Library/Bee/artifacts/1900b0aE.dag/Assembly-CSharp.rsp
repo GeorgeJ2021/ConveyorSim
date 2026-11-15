@@ -497,6 +497,7 @@
 "Assets/Scripts/Conveyor/conveyor.cs"
 "Assets/Scripts/PlacementManager.cs"
 "Assets/Scripts/Product/Product.cs"
+"Assets/Scripts/Product/ProductSpawner.cs"
 "Assets/TutorialInfo/Readme.cs"
 -langversion:9.0
 /deterministic

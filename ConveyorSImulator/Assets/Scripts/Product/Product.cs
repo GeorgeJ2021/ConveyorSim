@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Product : MonoBehaviour
 {
-    public conveyor currentConveyor;
+    private conveyor currentConveyor;
 
     private float distanceTravelled;
 
@@ -50,6 +50,19 @@ public class Product : MonoBehaviour
             
 
             
+        }
+    }
+
+    public void SetCurrentConveyor(conveyor conveyor)
+    {
+        currentConveyor = conveyor;
+        distanceTravelled = 0f;
+
+        transform.position = conveyor.GetPosition(0f) + positionOffset;
+
+        if (FollowConveyorRotation)
+        {
+            transform.rotation = conveyor.GetRotation();
         }
     }
 }
