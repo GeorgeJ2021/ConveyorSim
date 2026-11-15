@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,8 +7,10 @@ public class PlacementManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float snapDistance = 0.3f;
 
     [Header("Prefabs")]
+    private readonly List<conveyor> placedConveyors = new();
     [SerializeField] private GameObject shortConveyor;
     [SerializeField] private GameObject stdConveyor;
     [SerializeField] private GameObject inclineConveyor;
@@ -29,6 +32,46 @@ public class PlacementManager : MonoBehaviour
         currentGhost.name = "Ghost";
     }
     
+    private void TrySnap(ref Vector3 targetPosition)
+    {
+        conveyor ghostConveyor = currentGhost.GetComponent<conveyor>();
+        conveyor closestConveyor = null;
+        float closestDistance = Mathf.Infinity;
+        
+        Vector3 localOffset = ghostConveyor.entryPoint.localPosition;
+
+         Vector3 ghostEntry =
+                targetPosition +
+                (currentGhost.transform.rotation * localOffset);
+
+        foreach (conveyor Conveyor in placedConveyors)
+        {
+            //if (Conveyor.gameObject == ghostObject)
+              //  continue;
+            
+            float distance =
+                Vector3.Distance(
+                    ghostEntry,
+                    Conveyor.exitPoint.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestConveyor = Conveyor;
+            }
+
+            if (closestConveyor != null && closestDistance < snapDistance)
+            {
+                Vector3 offset =
+                    Conveyor.exitPoint.position -
+                    ghostEntry;
+
+                targetPosition += offset;
+
+                break;
+            }
+        }
+    }
     private void MoveGhost()
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -42,10 +85,24 @@ public class PlacementManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f, groundLayer))
         {
-           Vector3 position = hit.point;
-           position.y += placementOffset;
-           currentGhost.transform.position = position;
+           Vector3 targetPosition = hit.point;
+           targetPosition.y += placementOffset;
            currentGhost.transform.rotation = Quaternion.Euler(0, currentRotation, 0);
+           TrySnap(ref targetPosition);
+           currentGhost.transform.position = targetPosition;
+           
+        }
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            GameObject conveyorObject = Instantiate(
+                currentPrefab,
+                currentGhost.transform.position,
+                currentGhost.transform.rotation);
+
+            conveyor Conveyor = conveyorObject.GetComponent<conveyor>();
+
+            placedConveyors.Add(Conveyor);
         }
     }
     private void Update()
@@ -65,7 +122,7 @@ public class PlacementManager : MonoBehaviour
     public void SelectSTDConveyor()
     {
         SetCurrentPrefab(stdConveyor);
-        placementOffset = 0.44f;
+        placementOffset = 0.1f;
         
     }
 
