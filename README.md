@@ -1,6 +1,13 @@
 # Conveyor Simulator
 A modular conveyor belt simulation system built in Unity. The project allows users to dynamically place conveyor modules, connect them together, and simulate products moving through the conveyor network.
 
+## Demo Video:
+
+[<img src="https://img.youtube.com/vi/nEzzQd_xi_c/hqdefault.jpg" width="500" height="300"
+/>](https://www.youtube.com/watch?v=nEzzQd_xi_c)
+
+
+
 ## Overview:
 This project allows users to:
 
