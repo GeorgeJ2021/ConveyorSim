@@ -165,4 +165,12 @@ Products are spawned through a fixed spawner connected to the beginning of the c
 
 GitHub Repository: https://github.com/GeorgeJ2021/ConveyorSim
 
+Large binary assets are tracked using **Git LFS**.
+
+To clone the repository with all assets:
+
+```bash
+git lfs install
+git clone https://github.com/GeorgeJ2021/ConveyorSim.git
+
   
