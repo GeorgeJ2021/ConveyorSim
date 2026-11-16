@@ -158,8 +158,11 @@ Products are spawned through a fixed spawner connected to the beginning of the c
 - Conveyor routing currently follows direct neighbour connections and does not support automatic routing at junctions.
 
 - Conveyor speeds are configured per conveyor module.
-
+   
 - Product spacing is controlled through spawn timing rather than conveyor occupancy logic.
 
+### Repository
+
+GitHub Repository: https://github.com/GeorgeJ2021/ConveyorSim
 
   
